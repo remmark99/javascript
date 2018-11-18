@@ -1,16 +1,71 @@
 <meta charset="utf-8">
 <script>
-	let ticketNumber = +prompt("What is your ticket number?");
-	const first = Math.floor(ticketNumber / 100000);
-	const second = Math.floor(ticketNumber / 10000 % 10);
-	const third = Math.floor(ticketNumber / 1000 % 10);
-	const fourth = Math.floor(ticketNumber / 100 % 10);
-	const fifth = Math.floor(ticketNumber / 10 % 10);
-	const sixth = Math.floor(ticketNumber % 10);
-	
-	console.log(first, second, third, fourth, fifth, sixth);
-	
-	if (first + second + third === fourth + fifth + sixth) {
-		console.log("You got a lucky ticket there!");
-	}
+	'use strict';
+
+	console.log(mathOperation(10, 15, '+'));
+	console.log(mathOperation(29, 85, '-'));
+	console.log(mathOperation(17, -5, '*'));
+	console.log(mathOperation(21, 5, '/'));
+
+    /**
+     * Perform a mathematical operation
+     * @param {number} arg1 - First operand
+     * @param {number} arg2 - Second operand
+     * @param {string} operation - Mathematical operation
+     * @returns {number}
+     */
+	function mathOperation(arg1, arg2, operation) {
+	    switch(operation) {
+            case('+'):
+                return add(arg1, arg2);
+            case('-'):
+                return subtract(arg1, arg2);
+            case('*'):
+                return multiply(arg1, arg2);
+            case('/'):
+                return divide(arg1, arg2);
+            default:
+                console.log()
+        }
+    }
+
+    /**
+     * Performs mathematical addition
+     * @param {number} a - First operand
+     * @param {number} b - Second operand
+     * @returns {number}
+     */
+	function add(a, b) {
+	    return a + b;
+    }
+
+    /**
+     * Performs mathematical subtraction
+     * @param {number} a - First operand
+     * @param {number} b - Second operand
+     * @returns {number}
+     */
+    function subtract(a, b) {
+	    return a - b;
+    }
+
+        /**
+     * Performs mathematical multiplication
+     * @param {number} a - First operand
+     * @param {number} b - Second operand
+     * @returns {number}
+     */
+    function multiply(a, b) {
+	    return a * b;
+    }
+
+        /**
+     * Performs mathematical division
+     * @param {number} a - First operand
+     * @param {number} b - Second operand
+     * @returns {number}
+     */
+    function divide(a, b) {
+	    return (a / b).toFixed(2);
+    }
 </script>

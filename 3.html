@@ -2,14 +2,19 @@
 <script>
     'use script';
 
-    let a = (Math.random() * 100) - 50; // Получим значения [-50; 49]
-    let b = (Math.random() * 100) - 50; // Получим значения [-50; 49]
+    // Мое решение, не знаю почему оно оказалось таким сложным относительно простоты задания)
+    for (let i = 1; i <= 20; i++) {
+        let string = "";
+        for (let j = 1; j <= i * 2 - 1; j++) {
+            string += "x";
+        }
+        console.log(string);
+    }
 
-    if (a >= 0 && b >= 0) {
-        console.log(a - b);
-    } else if (a < 0 && b < 0) {
-        console.log(a * b);
-    } else {
-        console.log(a + b);
+    // Воспроизведение решения через hints
+    let string = "x";
+    for (let i = 0; i < 20; i++) {
+        console.log(string);
+        string += "xx";
     }
 </script>

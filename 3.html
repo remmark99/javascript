@@ -1,20 +1,105 @@
-<meta charset="utf-8">
-<script>
-    'use script';
-
-    // Мое решение, не знаю почему оно оказалось таким сложным относительно простоты задания)
-    for (let i = 1; i <= 20; i++) {
-        let string = "";
-        for (let j = 1; j <= i * 2 - 1; j++) {
-            string += "x";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-
+beta.3/css/bootstrap.min.css" integrity="sha384-
+Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <style>
+        .form-wrap {
+            margin: auto;
+            padding: 20px;
+            max-width: 800px
         }
-        console.log(string);
+    </style>
+</head>
+<body>
+<div class="form-wrap">
+    <form class="my-form" action="">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type="text" name="name" class="form-control" placeholder="Имя">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="text" name="phone" class="form-control" placeholder="Телефон">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <input type="password" name="password" class="form-control" placeholder="Пароль">
+            </div>
+            <div class="form-group col-md-6">
+                <input type="password" name="password_repeat" class="form-control" placeholder="Повторитепароль">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+</div>
+<script>
+    let name = document.querySelector('[placeholder="Имя"]');
+    let phone = document.querySelector('[placeholder="Телефон"]');
+    let password = document.querySelector('[placeholder="Пароль"]');
+    let passwordRepeat = document.querySelector('[placeholder="Повторитепароль"]');
+    let submit = document.querySelector('button');
+    submit.addEventListener('click', (event) => {
+        if(!checkForm()) {
+            event.preventDefault();
+            checkName();
+            checkPhone();
+            checkPassword();
+            checkPasswordRepeat();
+        }
+    });
+
+    function checkForm() {
+        return !!name.value &&
+            name.value.length < 51 &&
+            Number(phone.value).toString().length === 11 &&
+            password.value.length > 4 &&
+            password.value.length < 51 &&
+            password.value === passwordRepeat.value;
     }
 
-    // Воспроизведение решения через hints
-    let string = "x";
-    for (let i = 0; i < 20; i++) {
-        console.log(string);
-        string += "xx";
+    function checkName() {
+        if (!name.value || !(name.value.length < 51)) {
+            name.parentElement.removeChild(name.nextSibling);
+            name.style.backgroundColor = 'red';
+            let error = document.createElement('p');
+            error.textContent = "Your name should have at least one character and less than 50 of them!";
+            name.parentElement.appendChild(error);
+        }
+    }
+
+    function checkPhone() {
+        if (!(Number(phone.value).toString().length === 11)) {
+            phone.parentElement.removeChild(phone.nextSibling);
+            phone.style.backgroundColor = 'red';
+            let error = document.createElement('p');
+            error.textContent = "Your phone number should have exactly 11 figures!";
+            phone.parentElement.appendChild(error);
+        }
+    }
+
+    function checkPassword() {
+        if (password.value.length < 4 || password.value.length > 50) {
+            password.parentElement.removeChild(password.nextSibling);
+            password.style.backgroundColor = 'red';
+            let error = document.createElement('p');
+            error.textContent = "Your password should have between 4 and 50 characters!";
+            password.parentElement.appendChild(error);
+        }
+    }
+
+    function checkPasswordRepeat() {
+        if (passwordRepeat.value !== password.value) {
+            passwordRepeat.parentElement.removeChild(passwordRepeat.nextSibling);
+            passwordRepeat.style.backgroundColor = 'red';
+            let error = document.createElement('p');
+            error.textContent = "Your confirm password field should match your password!";
+            passwordRepeat.parentElement.appendChild(error);
+        }
     }
 </script>
+</body>
+</html>

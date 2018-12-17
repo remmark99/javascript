@@ -2,5 +2,101 @@
 <script>
 	'use strict';
 
-	for (let i = 0; i < 10; console.log(i), i++) {}
+	const settings = {
+	    questionsAmount: 5,
+
+    };
+
+    const player = {
+	    x: null,
+        y: null,
+        init(startX, startY) {
+	        this.x = startX;
+	        this.y = startY;
+        }
+    };
+
+    const game = {
+	    settings,
+        player,
+        run() {
+                this.player.init(this.settings.startingPositionX, this.settings.startingPositionY);
+
+                this.render();
+
+                while (true) {
+                    let direction = parseInt(prompt("What direction do you want to go? Enter -1 if you want to exit"));
+
+                    if (direction === -1) {
+                        break;
+                    } else if (isNaN(direction)) {
+                        alert("Please enter direction")
+                        continue;
+                    }
+
+                    switch(direction) {
+                        case 1:
+                            this.player.x--;
+                            this.player.y++;
+                            break;
+                        case 2:
+                            this.player.y++;
+                            break;
+                        case 3:
+                            this.player.x++;
+                            this.player.y++;
+                            break;
+                        case 4:
+                            this.player.x--;
+                            break;
+                        case 6:
+                            this.player.x++;
+                            break;
+                        case 7:
+                            this.player.x--;
+                            this.player.y--;
+                            break;
+                        case 8:
+                            this.player.y--;
+                            break;
+                        case 9:
+                            this.player.y--;
+                            this.player.x++;
+                            break;
+                    }
+
+                    if (this.player.x < 0) {
+                        this.player.x = 0;
+                    } else if (this.player.x >= this.settings.columnsCount) {
+                        this.player.x = this.settings.columnsCount - 1;
+                    }
+
+                    if (this.player.y < 0) {
+                        this.player.y = 0;
+                    } else if (this.player.y >= this.settings.rowsCount) {
+                        this.player.y = this.settings.rowsCount - 1;
+                    }
+
+                    this.render();
+                }
+        },
+        render() {
+	        let map = "";
+
+	        for (let row = 0; row < this.settings.rowsCount; row++) {
+	            for (let column = 0; column < this.settings.columnsCount; column++) {
+	                if (this.player.x === column && this.player.y === row) {
+	                    map += "o ";
+	                    continue;
+                    }
+	                map += "x ";
+                }
+                map += "\n";
+            }
+            console.clear();
+            console.log(map);
+        }
+    };
+
+    game.run();
 </script>
